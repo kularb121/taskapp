@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'The list of tasks')
-{{-- <h1>The list of tasks</h1> --}}
 
 @section('content')
     @if(count($tasks) > 0)
@@ -15,12 +14,3 @@
         <div> There are no tasks</div>
     @endif
 @endsection
-    {{-- <ul>
-        @foreach($tasks as $task)
-            <li>{{ $task }}</li>
-        @endforeach
-    </ul>
-Welcome to the page
-@isset($name)
-    <h1>Hello, {{ $name }}</h1>
-@endisset --}}
