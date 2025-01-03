@@ -10,19 +10,20 @@ Route::get('/', function () {
     return redirect()->route('tasks.index');
 });
 
-Route::get('tasks/index', function () {
-    return view('index', [
-        'tasks' => Task::all()
-    ]);
-})->name('tasks.index');
-
 Route::get('/tasks', function () {
     return view('index', [
-        'tasks' => Task::all()
+        'tasks' => Task::latest()->paginate(10)
     ]);
 })->name('tasks.index');
 
-Route::view('/tasks/create', 'create')->name('tasks.create');	
+Route::view('/tasks/create', 'create')->name('tasks.create');
+
+Route::delete('/tasks/{task}', function (Task $task) {
+    $task->delete();
+    return redirect()->route('tasks.index')
+            ->with('success', 'Task deleted successfully');
+})->name('tasks.destroy');
+
 
 Route::get('/tasks/{task}/edit', function (Task $task) {
     return view('edit', [
